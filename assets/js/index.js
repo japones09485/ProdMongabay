@@ -163,7 +163,7 @@ for (var i = 0; i < ValPaises.length; i++) {
 					boton.style.backgroundColor = "#FFFFFF";
 					boton.classList.remove('text-white');
 					boton.classList.add('text-dark');
-					break; 
+					break;
 
 				case 'ValPeru':
 					var boton = document.getElementById('Peru');
@@ -216,6 +216,10 @@ function ColorPais(pais){
 // inicia los mapas dependiendo lo seleccionado
 
 function MapaInicio(){
+
+	// Obtén una referencia al elemento de la pantalla de carga
+var loader = document.getElementById('loader');
+
 	const token = 'pk.eyJ1IjoiamhvbmxlYWwxMiIsImEiOiJjbGYwbDNlcjkwYTcyM3hwcGlxY2IzdXE3In0.wbfuqllEpRLeoTA272Vd9w';
 mapboxgl.accessToken = token;
  map = new mapboxgl.Map({
@@ -225,6 +229,24 @@ mapboxgl.accessToken = token;
 	center: [-75.5, -10], // starting position [lng, lat]
 	zoom: 3 // starting zoom
 });
+
+ActivosObjetos();//pinta botones de los objetos
+	ActivosPaises();//pinta botones de los paises
+
+	// Muestra el elemento de la pantalla de carga mientras se carga el mapa
+	map.on("load", function () {
+		// ocultar pantalla de carga
+		document.getElementById("loader").style.display = "none";
+	});
+
+  // Maneja errores mientras se carga el mapa
+map.on('error', function() {
+	loader.style.display = 'none';
+	alert('Error loading the map.');
+  });
+  
+  // Muestra el elemento de la pantalla de carga hasta que se cargue el mapa o se produzca un error
+  loader.style.display = 'block';
 
 }
 
@@ -329,6 +351,8 @@ if(Cantpaises.length > 0 && CantObjetos.length > 0){
 		
 		CantObjetos.forEach(objet => {
 			var rutaArch = 'json/' + element + '/' + objet+'.json';
+
+			console.log(rutaArch);
 		
 			switch (objet) {
 				case 'Pasivos':
@@ -338,9 +362,17 @@ if(Cantpaises.length > 0 && CantObjetos.length > 0){
 				case 'Tuberias':
 				PintarTuberias(rutaArch);	
 				break;
+
+				case 'ReservasIn':
+				PintarReservasIndi(rutaArch);	
+				break;
+
+				case 'ReservasAmb':
+				PintarReservasIndi(rutaArch);	
+				break;
 			
 				default:
-					break;
+				break;
 			}
 	    })
 	});
@@ -355,44 +387,39 @@ if(Cantpaises.length > 0 && CantObjetos.length > 0){
 
 function PintarPasivos(Ruta){
 	//Funcion pinta los puntos del json
+	
 	fetch(Ruta)
 	.then(response => response.json())
 	.then(data => {
-	
-
-	
-		for (const feature of data.features) {
-
-			// create a HTML element for each feature
-			const el = document.createElement('div');
-			el.className = 'marker';
-
-			// make a marker for each feature and add to the map
-			new mapboxgl.Marker(el)
-				.setLngLat(feature.geometry.coordinates)
-				.setPopup(
-					new mapboxgl.Popup({
-						offset: 25
-					}) // add popups
-					.setHTML(
-						`<h3>Empresa: ${feature.properties.empresa}</h3>
-						<p>Departamento: ${feature.properties.Dpto}</p>
-						<p>Lote pozo: ${feature.properties.Lote_Pozo}</p>
-						<p>Lote pozo: ${feature.geometry.coordinates}</p>
-  `
-					)
-				)
-				.addTo(map);
+		for (const feature of data.features) { // bucle para cada característica (feature) en el archivo GeoJSON
+			const el = document.createElement('div'); // crear un nuevo elemento HTML para el marcador
+			el.className = 'marker'; // agregar una clase CSS al elemento
+		
+			new mapboxgl.Marker(el) // crear un nuevo marcador de Mapbox GL con el elemento HTML
+			.setLngLat(new mapboxgl.LngLat(feature.geometry.coordinates[0], feature.geometry.coordinates[1]))
+			// establecer las coordenadas del marcador utilizando la geometría de la característica
+				.setPopup(new mapboxgl.Popup({ offset: 25 }) // crear un nuevo popup para el marcador
+				.setHTML(
+					`<h3>Empresa: ${feature.properties.empresa}</h3>
+					<p>Departamento: ${feature.properties.Dpto}</p>
+					<p>Lote pozo: ${feature.properties.Lote_Pozo}</p>
+					<p>Lote pozo: ${feature.geometry.coordinates}</p>
+`			
+)
+)
+				.addTo(map); // agregar el marcador al mapa
 		}
 
-	
+		
 	});
+
+
+	
 
 }
 
 function  PintarTuberias(Ruta){
 	//Funcion pinta los puntos del json
-	console.log(Ruta);
 	
 	fetch(Ruta)
 				.then(response => response.json())
@@ -406,28 +433,28 @@ function  PintarTuberias(Ruta){
 						
 						
 					// Dibujar la línea
-					map.addLayer({
-					  'id': idTub
-					  ,
-					  'type': 'line',
-					  'source': {
-						'type': 'geojson',
-						'data': line
-					  },
-					  'paint': {
-						'line-color': 'black',
-						'line-width': 3
-					  },
-					  'cursor': 'crosshair'
-					});
+					map.on("load", function () {
+						map.addLayer({
+							'id': idTub
+							,
+							'type': 'line',
+							'source': {
+							  'type': 'geojson',
+							  'data': line
+							},
+							'paint': {
+							  'line-color': 'black',
+							  'line-width': 3
+							},
+							'cursor': 'crosshair'
+						  });
+					})
+					
 			
 					// Agregar el evento click a la capa de línea
 					map.on('click', 'line-' + line.properties.OBJECTID, function(e) {
 					  // Obtener la información de la línea
-					  console.log(line.properties);
-					  console.log('fin del  click');
-					
-			
+					 
 					  // Mostrar información adicional de la línea en una alerta
 			
 					  Swal.fire(
@@ -443,19 +470,61 @@ function  PintarTuberias(Ruta){
 
 }
 
+function PintarReservasIndi(Ruta){
+	    // Cargar los datos del archivo JSON de poligonos de los resguardos
+		fetch(Ruta)
+		.then(response => response.json())
+		.then(data => {
+		  // Iterar sobre los polígonos en los datos
+		  data.features.forEach(polygon => {
+			// Crear una capa de polígono para cada polígono en los datos
+			map.on("load", function () {
+			map.addLayer({
+			  'id': 'polygon-' + polygon.properties.OBJECTID,
+			  'type': 'fill',
+			  'source': {
+				'type': 'geojson',
+				'data': polygon
+			  },
+			  'paint': {
+				'fill-color': 'red',
+				'fill-opacity': 0.5,
+				'fill-outline-color': '#2F0E1F'
+			  }
+			});
+		});
+	
+	
+			// Agregar el evento click a la capa de polígono
+			map.on('click', 'polygon-' + polygon.properties.objectid, function(e) {
+			  // Mostrar información adicional del polígono en una alerta
+			  Swal.fire('Nombre: '+ polygon.properties.nombre)
+			  Swal.fire(
+				'Nombre: '+ polygon.properties.nombre,
+				'Categoria: '+ polygon.properties.categoria
+			   
+			  )
+			});
+		  });
+		});
+}	
+
 
 
  // eventos de click de los botones para la busqueda
 
 Pasivos.addEventListener("click", function() {
 	const valorPasivos = document.getElementById('ValPasivos');
-
+	
 	if(valorPasivos.value == 'true'){
 		valorPasivos.value = 'false';
 	}else{
 		valorPasivos.value = 'true';
 	}
-	InicioMapa();
+
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 
 });
 
@@ -470,8 +539,9 @@ Tuberias.addEventListener("click", function() {
 	}else{
 		valorTuberia.value = 'true';
 	}
-
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 });
 
 
@@ -483,8 +553,9 @@ ReservasIn.addEventListener("click", function() {
 	}else{
 		valorReservas.value = 'true';
 	}
-
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 });
 
 
@@ -496,8 +567,9 @@ ReservasAmb.addEventListener("click", function() {
 	}else{
 		valorAmbien.value = 'true';
 	}
-
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 });
 
 
@@ -511,7 +583,9 @@ ReservasAmb.addEventListener("click", function() {
 	}else{
 		valorBolivia.value = 'true';
 	}
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 
 });
 
@@ -526,8 +600,9 @@ Colombia.addEventListener("click", function() {
 	}else{
 		valorColombia.value = 'true';
 	}
-
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 });
 
 
@@ -539,8 +614,9 @@ Ecuador.addEventListener("click", function() {
 	}else{
 		valorEcuador.value = 'true';
 	}
-
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 });
 
 
@@ -553,6 +629,8 @@ Peru.addEventListener("click", function() {
 		valorPeru.value = 'true';
 	}
 
-	InicioMapa();
+	ActivosObjetos();
+	ActivosPaises();
+	//InicioMapa();
 });
 
