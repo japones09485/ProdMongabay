@@ -1,0 +1,14 @@
+{
+"type": "FeatureCollection",
+"name": "Pasivos_ambientales",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Cod": "B1", "Lote_Pozo": "SAN-12", "Dpto": "Tarija", "ANP": "Serranía del Aguaragüe", "Administra": "YPFB", "Este": 436000, "Norte": 7603890, "Zona": 20, "empresa": "YPFB", "Field10": null, "long": -63.618587727799998, "lat": -21.667118974299999 }, "geometry": { "type": "Point", "coordinates": [ -63.618587727753528, -21.667118974255818 ] } },
+{ "type": "Feature", "properties": { "Cod": "B2", "Lote_Pozo": "SAN-13", "Dpto": "Tarija", "ANP": "Serranía del Aguaragüe", "Administra": "YPFB", "Este": 435749, "Norte": 7603991, "Zona": 20, "empresa": "YPFB", "Field10": null, "long": -63.621009736799998, "lat": -21.6661974427 }, "geometry": { "type": "Point", "coordinates": [ -63.621009736806307, -21.66619744266734 ] } },
+{ "type": "Feature", "properties": { "Cod": "B3", "Lote_Pozo": "LMS-X1", "Dpto": "Tarija", "ANP": "Serranía del Aguaragüe", "Administra": "YPFB Chaco S.A.", "Este": 440457, "Norte": 7642135, "Zona": 20, "empresa": "YPFB Chaco S.A.", "Field10": null, "long": -63.574153326000001, "lat": -21.321743252299999 }, "geometry": { "type": "Point", "coordinates": [ -63.574153326000719, -21.321743252340681 ] } },
+{ "type": "Feature", "properties": { "Cod": "B4", "Lote_Pozo": "LMS-6", "Dpto": "Tarija", "ANP": "Serranía del Aguaragüe", "Administra": "YPFB Chaco S.A.", "Este": 440280, "Norte": 7641409, "Zona": 20, "empresa": "YPFB Chaco S.A.", "Field10": null, "long": -63.575885601000003, "lat": -21.3282967128 }, "geometry": { "type": "Point", "coordinates": [ -63.575885600950144, -21.328296712801862 ] } },
+{ "type": "Feature", "properties": { "Cod": "B5", "Lote_Pozo": "LMS-10", "Dpto": "Tarija", "ANP": "Serranía del Aguaragüe", "Administra": "YPFB Chaco S.A.", "Este": 440054, "Norte": 7640287, "Zona": 20, "empresa": "YPFB Chaco S.A.", "Field10": null, "long": -63.578104570599997, "lat": -21.338426313900001 }, "geometry": { "type": "Point", "coordinates": [ -63.578104570591847, -21.338426313917022 ] } },
+{ "type": "Feature", "properties": { "Cod": "B6", "Lote_Pozo": "BBL-X1", "Dpto": "Cochabamba", "ANP": "Carrasco", "Administra": "YPFB Chaco S.A", "Este": 353054, "Norte": 8084861, "Zona": 20, "empresa": "YPFB Chaco S.A", "Field10": null, "long": -64.382744249300004, "lat": -17.316886379700001 }, "geometry": { "type": "Point", "coordinates": [ -64.382744249323963, -17.316886379659373 ] } },
+{ "type": "Feature", "properties": { "Cod": "B7", "Lote_Pozo": "CHU-X2", "Dpto": "Tarija", "ANP": "Tariquía", "Administra": "YPFB", "Este": 374989, "Norte": 7538166, "Zona": 20, "empresa": "YPFB", "Field10": null, "long": -64.213240073899996, "lat": -22.257532329699998 }, "geometry": { "type": "Point", "coordinates": [ -64.213240073906718, -22.257532329697018 ] } }
+]
+}
