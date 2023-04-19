@@ -14,8 +14,6 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
 <script src="https://unpkg.com/@turf/turf"></script>
 </head>
-
-
 <body>
   <div id="header">
     <div class="row">
@@ -27,7 +25,7 @@
                     <input type="hidden"  name="Pasivos" id="ValPasivos"  class="ValPaises"  value="true">
                   </li>
                 <li class="nav-item">
-                    <button type="button" class="btn btn-s m-2 text-white" id="Tuberias">Tuberiasssss Petroleras</button>
+                    <button type="button" class="btn btn-s m-2 text-white" id="Tuberias">Tuberias Petroleras</button>
                     <input type="hidden"   class="ValPaises" id="ValTuberias" name="Tuberias" value="false">
                   </li>
                 <li class="nav-item">
@@ -57,39 +55,46 @@
             <button  id="Bolivia" class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/bolivia.png" alt="" class="icon-pais"> Bolivia</button>
             <input type="hidden" name="Bolivia" id="ValBolivia"  name="ValPais" value="true" class="PaisesAc">
             <button  id="Colombia" class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/colombia.png" alt="" class="icon-pais"> Colombia</button>
-            <input type="hidden" name="Colombia" id="ValColombia"  name="ValPais" value="false" class="PaisesAc">
+            <input type="hidden" name="Colombia" id="ValColombia"  name="ValPais" value="true" class="PaisesAc">
             <button  id="Ecuador" class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/ecuador.png" alt="" class="icon-pais">Ecuador</button>
-            <input type="hidden" name="Ecuador" id="ValEcuador"  name="ValPais" value="false" class="PaisesAc">
+            <input type="hidden" name="Ecuador" id="ValEcuador"  name="ValPais" value="true" class="PaisesAc">
             <button  id="Peru"class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/peru.png" alt="" class="icon-pais">Peru</button>
-            <input type="hidden" name="Peru" id="ValPeru"  name="ValPais" value="false" class="PaisesAc">
+            <input type="hidden" name="Peru" id="ValPeru"  name="ValPais" value="true" class="PaisesAc">
             <div class="form-group">
-            
-
               
-            <select class="form-control" id="RegionSel" onchange="mapearFunc()">
-            
+            <select class="form-control" id="RegionSel" onchange="mapearFunc()">            
             </select>
+
+            
             </div>
             
           </div>
+  
         </div>
+
+        <div class="center ">
+          <button class="buscar p-2" onclick="InicioMapa()">
+            <img src="./assets/img/search.png" class="search" alt="Buscar">
+          </button>
+        </div>
+
+        
       </nav>
 </div>
 
-
-<div class="d-flex justify-content-center m-3">
-  <button displa type="button" class="btn btn-s btn-cuatro  m-2" id="Buscar">Buscar</button>
-
-</div>
-
-
 <div class="map-container">
     <div id="map"></div>
+    <div id="loader">
+      <div class="spinner-border" role="status">
+        <span class="sr-only"></span>
+      </div>
+    <p>Cargando Mapa</p>
+    </div>
   </div>
 
  <!-- Incluimos los archivos JavaScript de Bootstrap -->
  <script src="./assets/js/bootstrap.min.js"></script>
-<script src="./assets/js/index.js" onload="InicioMapa()"></script>
+<script src="./assets/js/index.js" onload="MapaInicio()"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
