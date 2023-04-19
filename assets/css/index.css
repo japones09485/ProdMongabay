@@ -1,0 +1,71 @@
+body { margin: 0; padding: 0; }
+.map-container {
+  width: 100%;
+  height: 800px; /* Altura deseada del mapa */
+  position: relative;
+}
+
+#RegionSel {
+  display: none;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#header{
+
+  margin-top: 3%;
+  margin-bottom: 10px;
+
+}
+
+#paises{
+  display: flex;
+  justify-content: center;
+}
+
+.icon-pais{
+  max-width: 30px;
+  max-height: 30px;
+}
+
+.marker {
+    background-image: url('../img/gota_petroleo.png');
+    background-size: cover;
+    width: 10px;
+    height: 15px;
+    cursor: pointer;
+  }
+
+
+  .btn-s{
+    color:#198754;
+    border: 1px solid #198754;
+    border-radius: 7px;
+    padding-left : 30px;
+    padding-right : 30px;
+    font-size: 18px;
+  }
+
+  .btn-s:hover {
+    background-color: #198754;
+  }
+
+  #Buscar {
+    display: none;
+  }
+
+  .tts{
+    background-color: blue;
+  }
+
+
+
+
+
+  

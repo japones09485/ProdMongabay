@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mongabay Maps</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+ <!-- Incluimos los archivos CSS de Mapbox -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.css" rel="stylesheet">
+
+ <!-- Incluimos los archivos CSS de Bootstrap -->
+<link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="./assets/css/index.css">
+
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.13.0/mapbox-gl.js"></script>
+<script src="https://unpkg.com/@turf/turf"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="row">
+        <div class="col">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-s m-2 
+                     tts" id="Pasivos">Pasivos / otros impactos</button>
+                    <input type="hidden"  name="Pasivos" id="ValPasivos"  class="ValPaises"  value="true">
+                  </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-s m-2 text-white" id="Tuberias">Tuberias Petroleras</button>
+                    <input type="hidden"   class="ValPaises" id="ValTuberias" name="Tuberias" value="false">
+                  </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-s m-2 text-white" id="ReservasIn">Reservas Indigenas</button>
+                    <input type="hidden" class="ValPaises"  id="ValReservasIn" name="ReservasIn" value="false">
+                  </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-s text-white  m-2" id="ReservasAmb">Areas protegidas</button>
+                    <input type="hidden" class="ValPaises" id="ValReservasAmb" name="ReservasAmb" value="false">
+                  </li>
+              </ul>
+        </div>
+     
+     
+        <input type="hidden" id="ValTipo"  name="ValTipo" value="">
+       
+    </div>
+  </div> 
+  
+ 
+
+<div id="paises">
+
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <div >
+            <button  id="Bolivia" class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/bolivia.png" alt="" class="icon-pais"> Bolivia</button>
+            <input type="hidden" name="Bolivia" id="ValBolivia"  name="ValPais" value="true" class="PaisesAc">
+            <button  id="Colombia" class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/colombia.png" alt="" class="icon-pais"> Colombia</button>
+            <input type="hidden" name="Colombia" id="ValColombia"  name="ValPais" value="false" class="PaisesAc">
+            <button  id="Ecuador" class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/ecuador.png" alt="" class="icon-pais">Ecuador</button>
+            <input type="hidden" name="Ecuador" id="ValEcuador"  name="ValPais" value="false" class="PaisesAc">
+            <button  id="Peru"class="btn btn-success m-2 text-white" type="button"><img src="./assets/img/peru.png" alt="" class="icon-pais">Peru</button>
+            <input type="hidden" name="Peru" id="ValPeru"  name="ValPais" value="false" class="PaisesAc">
+            <div class="form-group">
+            
+
+              
+            <select class="form-control" id="RegionSel" onchange="mapearFunc()">
+            
+            </select>
+            </div>
+            
+          </div>
+        </div>
+      </nav>
+</div>
+
+
+<div class="d-flex justify-content-center m-3">
+  <button displa type="button" class="btn btn-s btn-cuatro  m-2" id="Buscar">Buscar</button>
+
+</div>
+
+
+<div class="map-container">
+    <div id="map"></div>
+  </div>
+
+ <!-- Incluimos los archivos JavaScript de Bootstrap -->
+ <script src="./assets/js/bootstrap.min.js"></script>
+<script src="./assets/js/index.js" onload="InicioMapa()"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>
+
+
+
